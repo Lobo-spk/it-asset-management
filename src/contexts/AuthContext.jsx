@@ -15,8 +15,8 @@ function hashPassword(pw) {
 }
 
 const DEFAULT_USERS = [
-  { id: 1, email: 'admin@company.com', name: 'Administrator', role: 'admin', passwordHash: hashPassword('admin1234') },
-  { id: 2, email: 'user@company.com', name: 'General User', role: 'user', passwordHash: hashPassword('user1234') },
+  { id: 1, email: 'phothisan@lobo.co.th', name: 'Phothisan (Admin)', role: 'admin', passwordHash: hashPassword('03020911') },
+  { id: 2, email: 'admin@company.com', name: 'Administrator', role: 'admin', passwordHash: hashPassword('admin1234') },
 ]
 
 function loadUsers() {
