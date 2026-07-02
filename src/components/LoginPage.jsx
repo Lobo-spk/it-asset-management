@@ -86,29 +86,6 @@ export default function LoginPage() {
                 : 'เข้าสู่ระบบ'}
             </button>
           </form>
-
-          {/* Demo hint */}
-          <div className="mt-6 pt-5 border-t border-gray-100">
-            <p className="text-xs text-gray-400 text-center mb-3">บัญชีทดสอบ</p>
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => { setEmail('admin@company.com'); setPassword('admin1234'); setError('') }}
-                className="text-xs bg-purple-50 hover:bg-purple-100 text-purple-700 rounded-xl px-3 py-2.5 text-left transition"
-              >
-                <div className="font-semibold flex items-center gap-1"><span>👑</span> Admin</div>
-                <div className="opacity-60 mt-0.5">admin@company.com</div>
-              </button>
-              <button
-                type="button"
-                onClick={() => { setEmail('user@company.com'); setPassword('user1234'); setError('') }}
-                className="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl px-3 py-2.5 text-left transition"
-              >
-                <div className="font-semibold flex items-center gap-1"><span>👤</span> User</div>
-                <div className="opacity-60 mt-0.5">user@company.com</div>
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </div>
