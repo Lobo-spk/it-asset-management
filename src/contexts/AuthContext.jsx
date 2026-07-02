@@ -22,7 +22,16 @@ const DEFAULT_USERS = [
 function loadUsers() {
   try {
     const raw = localStorage.getItem(USERS_KEY)
-    return raw ? JSON.parse(raw) : DEFAULT_USERS
+    if (!raw) return DEFAULT_USERS
+    const stored = JSON.parse(raw)
+    // ensure every default user exists (by email) so new deployments take effect
+    const merged = [...stored]
+    for (const def of DEFAULT_USERS) {
+      if (!merged.find(u => u.email.toLowerCase() === def.email.toLowerCase())) {
+        merged.push(def)
+      }
+    }
+    return merged
   } catch { return DEFAULT_USERS }
 }
 
