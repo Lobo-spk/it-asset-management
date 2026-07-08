@@ -73,7 +73,7 @@ export function useComputers() {
       setLoading(false)
       return
     }
-    fetch('/computer.csv')
+    fetch(import.meta.env.BASE_URL + 'computer.csv')
       .then(r => r.text())
       .then(text => {
         const result = Papa.parse(text, {

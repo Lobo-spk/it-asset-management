@@ -11,6 +11,7 @@ import LoginPage from './components/LoginPage'
 import WarrantyReport from './components/WarrantyReport'
 import ImportCSV from './components/ImportCSV'
 import SoftwareLicense from './components/SoftwareLicense'
+import LoanManagement from './components/LoanManagement'
 
 const TABS = [
   { key: 'dashboard', label: 'Dashboard', roles: ['admin', 'user'] },
@@ -19,6 +20,7 @@ const TABS = [
   { key: 'budget', label: '📊 วิเคราะห์งบประมาณ', roles: ['admin', 'user'] },
   { key: 'inventory', label: '📦 คลังอะไหล่', roles: ['admin', 'user'] },
   { key: 'license', label: '🪪 License & MA', roles: ['admin', 'user'] },
+  { key: 'loan', label: '🔄 ยืม-คืน', roles: ['admin', 'user'] },
   { key: 'report', label: '📋 รายงาน', roles: ['admin', 'user'] },
   { key: 'import', label: '📥 นำเข้าข้อมูล', roles: ['admin'] },
   { key: 'users', label: '👥 จัดการผู้ใช้', roles: ['admin'] },
@@ -157,6 +159,7 @@ function AppContent() {
         {tab === 'budget' && <BudgetAnalysis computers={computers} onBack={() => setTab('dashboard')} />}
         {tab === 'inventory' && <Inventory onBack={() => setTab('dashboard')} readOnly={!isAdmin} />}
         {tab === 'license' && <SoftwareLicense />}
+        {tab === 'loan' && <LoanManagement computers={computers} readOnly={!isAdmin} />}
         {tab === 'report' && <WarrantyReport computers={computers} onBack={() => setTab('dashboard')} />}
         {tab === 'import' && isAdmin && (
           <ImportCSV
