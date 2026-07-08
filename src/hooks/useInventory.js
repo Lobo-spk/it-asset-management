@@ -59,31 +59,32 @@ export function useInventory() {
 
   // meta: { requesterName, recipientName, department, notes } — required for withdrawals (delta < 0)
   const adjustStock = (id, delta, meta = {}) => {
-    setItems(prev => {
-      const item = prev.find(i => i.id === id)
-      const newQty = Math.max(0, (item?.quantity ?? 0) + delta)
-      const actualDelta = item ? newQty - item.quantity : delta
-      if (actualDelta < 0 && item) {
-        const record = {
-          id: Date.now(),
-          date: new Date().toISOString().slice(0, 10),
-          itemId: id,
-          itemName: item.name,
-          itemCode: item.code,
-          category: item.category,
-          quantity: Math.abs(actualDelta),
-          unit: item.unit,
-          unitPrice: item.unitPrice,
-          requesterName: meta.requesterName || '',
-          recipientName: meta.recipientName || '',
-          department: meta.department || '',
-          notes: meta.notes || '',
-          createdAt: new Date().toISOString(),
-        }
-        setHistory(h => [record, ...h])
+    const item = items.find(i => i.id === id)
+    if (!item) return
+    const newQty = Math.max(0, item.quantity + delta)
+    const actualDelta = newQty - item.quantity
+
+    setItems(prev => prev.map(i => i.id === id ? { ...i, quantity: newQty } : i))
+
+    if (actualDelta < 0) {
+      const record = {
+        id: Date.now(),
+        date: new Date().toISOString().slice(0, 10),
+        itemId: id,
+        itemName: item.name,
+        itemCode: item.code,
+        category: item.category,
+        quantity: Math.abs(actualDelta),
+        unit: item.unit,
+        unitPrice: item.unitPrice,
+        requesterName: meta.requesterName || '',
+        recipientName: meta.recipientName || '',
+        department: meta.department || '',
+        notes: meta.notes || '',
+        createdAt: new Date().toISOString(),
       }
-      return prev.map(i => i.id === id ? { ...i, quantity: newQty } : i)
-    })
+      setHistory(h => [record, ...h])
+    }
   }
 
   const deleteHistory = (id) => {
